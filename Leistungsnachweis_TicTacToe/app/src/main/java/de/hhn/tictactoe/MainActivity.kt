@@ -3,6 +3,7 @@ package de.hhn.tictactoe
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -31,6 +32,7 @@ import de.hhn.tictactoe.view.HomeScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 class MainActivity : ComponentActivity() {
+    private val gameViewModel: GameViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -56,7 +58,8 @@ class MainActivity : ComponentActivity() {
                                 actions = {
                                     IconButton(
                                         onClick = {
-                                            // TODO:  
+                                            // TODO:
+                                            gameViewModel.resetGame()
                                         }
                                     ) {
                                         Icon(

@@ -24,6 +24,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import de.hhn.tictactoe.GameViewModel
 import de.hhn.tictactoe.model.Status
 import de.hhn.tictactoe.R
 import de.hhn.tictactoe.model.Field
@@ -31,7 +33,7 @@ import de.hhn.tictactoe.model.GameModel
 
 @ExperimentalMaterial3Api
 @Composable
-fun HomeScreen() {
+fun HomeScreen(gameViewModel: GameViewModel = viewModel()) {
     // currentGame, gameField are Dummy data
     val currentGame = GameModel()
     val gameField =  Array(3) {
@@ -121,6 +123,7 @@ fun HomeScreen() {
                                     .width(111.dp),
                                 onClick = {
                                     // TODO:
+                                    gameField[field.indexColumn][field.indexRow].status = Status.PlayerX
                                 }
                             ) {
                                 Box(
