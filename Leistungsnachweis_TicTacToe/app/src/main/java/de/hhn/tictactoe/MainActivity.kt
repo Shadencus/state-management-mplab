@@ -32,6 +32,7 @@ import de.hhn.tictactoe.view.HomeScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 class MainActivity : ComponentActivity() {
+    //Init the ViewModel
     private val gameViewModel: GameViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,6 +60,7 @@ class MainActivity : ComponentActivity() {
                                     IconButton(
                                         onClick = {
                                             // TODO:
+                                            //Calling the resetGame function
                                             gameViewModel.resetGame()
                                         }
                                     ) {

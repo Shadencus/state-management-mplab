@@ -1,5 +1,6 @@
 package de.hhn.tictactoe.view
 
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -17,9 +18,12 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -34,13 +38,10 @@ import de.hhn.tictactoe.model.GameModel
 @ExperimentalMaterial3Api
 @Composable
 fun HomeScreen(gameViewModel: GameViewModel = viewModel()) {
-    // currentGame, gameField are Dummy data
-    val currentGame = GameModel()
-    val gameField =  Array(3) {
-        Array(3) {
-            Field()
-        }
-    }
+    //Setting the GameModel and the GameField
+    val currentGame by gameViewModel.gameModel.collectAsState()
+    val gameField by gameViewModel.gameField.collectAsState()
+
 
     val currentPlayer = currentGame.currentPlayer
     val isGameEnding: Boolean = currentGame.isGameEnding
@@ -55,7 +56,7 @@ fun HomeScreen(gameViewModel: GameViewModel = viewModel()) {
             text = stringResource(id = R.string.app_name),
             style = MaterialTheme.typography.displayLarge,
             fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(vertical = 50.dp),
+            modifier = Modifier.padding(vertical = 30.dp), //made the padding smaller so that the winningplayer-Text doens't need scrolling to be sjown
             color = Color.Black
         )
         Column(
@@ -123,7 +124,10 @@ fun HomeScreen(gameViewModel: GameViewModel = viewModel()) {
                                     .width(111.dp),
                                 onClick = {
                                     // TODO:
-                                    gameField[field.indexColumn][field.indexRow].status = Status.PlayerX
+                                    //Call selectField function
+                                    gameViewModel.selectField(field)
+                                    //Call checkEndingGame function
+                                    gameViewModel.checkEndingGame()
                                 }
                             ) {
                                 Box(
