@@ -56,7 +56,7 @@ fun HomeScreen(gameViewModel: GameViewModel = viewModel()) {
             text = stringResource(id = R.string.app_name),
             style = MaterialTheme.typography.displayLarge,
             fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(vertical = 30.dp), //made the padding smaller so that the winningplayer-Text doens't need scrolling to be sjown
+            modifier = Modifier.padding(vertical = 30.dp), //made the padding smaller so that the winningplayer-Text doens't need scrolling to be shown
             color = Color.Black
         )
         Column(

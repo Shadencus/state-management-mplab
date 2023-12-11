@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
 class GameViewModel : ViewModel() {
+
     //Init StateFlow for gameModel
     private val _gameModel = MutableStateFlow(GameModel())
     val gameModel : StateFlow<GameModel> = _gameModel.asStateFlow()
@@ -16,6 +17,11 @@ class GameViewModel : ViewModel() {
     //Init StateFlow for gameField
     private val _gameField = MutableStateFlow(Array(3){Array(3){Field()}})
     val gameField: StateFlow<Array<Array<Field>>> = _gameField.asStateFlow()
+
+    //resetting everything, when the GameViewModel is initialized, to ensure the game starts correct
+    init {
+        resetGame()
+    }
 
     // Hier wird das Spielfeld und Gamemodel resettet
     // In HomeScreen.kt TODO beachten
